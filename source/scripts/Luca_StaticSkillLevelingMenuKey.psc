@@ -1,7 +1,5 @@
 scriptname Luca_StaticSkillLevelingMenuKey extends SKI_ConfigBase
 
-import StaticSkillLevelingEffectScript
-
 int function GetVersion()
 	return 4
 endFunction
@@ -9,9 +7,8 @@ endFunction
 int			_keymapOID_K
 
 ; State
-int			_myKey					= 48 global
 
-
+GlobalVariable Property LStaticSkillLevelingKey Auto
 
 ; INITIALIZATION ----------------------------------------------------------------------------------
 
@@ -19,6 +16,7 @@ int			_myKey					= 48 global
 event OnConfigInit()
 	Pages = new string[1]
 	Pages[0] = "Keybinding"
+
 endEvent
 
 ; @implements SKI_QuestBase
@@ -39,16 +37,9 @@ event OnPageReset(string a_page)
 
 		SetCursorPosition(1)
 
-		_keymapOID_K = AddKeyMapOption("KeyBind", _myKey)
+		_keymapOID_K = AddKeyMapOption("KeyBind", LStaticSkillLevelingKey.GetValueInt())
 	endIf
 
-	if (a_page == "Keybinding")
-		SetCursorFillMode(TOP_TO_BOTTOM)
-
-		SetCursorPosition(1)
-
-		_keymapOID_K = AddKeyMapOption("KeyBind", _myKey)
-	endif
 endEvent
 
 ; @implements SKI_ConfigBase
@@ -72,9 +63,8 @@ event OnOptionKeyMapChange(int a_option, int a_keyCode, string a_conflictControl
 		endIf
 
 		if (continue)
-			_myKey = a_keyCode
-			SetKeymapOptionValue(a_option, a_keyCode)
-			((self as quest) as StaticSkillLevelingQuestScript).setStaticSkillMenuKey(a_keyCode)
+			LStaticSkillLevelingKey.SetValueInt(a_keyCode);
+            SetKeymapOptionValue(a_option, a_keyCode)
 		endIf
 	endIf
 endEvent

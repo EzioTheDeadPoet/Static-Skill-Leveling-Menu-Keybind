@@ -1,7 +1,8 @@
 scriptname StaticSkillLevelingEffectScript extends ActiveMagicEffect
 {This script checks for a level up when the player wakes from sleep and allows them to assign skillpoints}
 
-import StaticSkillLevelingQuestScript
+
+GlobalVariable Property LStaticSkillLevelingKey Auto
 
 ;==========================================
 ;Keybinding
@@ -101,8 +102,6 @@ Message property SkillIncreasesAtMaxMenu auto
 
 ;==============================================================================================================
 
-
-
 ;==========================================
 ;Register for sleep and track player level
 ;==========================================
@@ -127,33 +126,18 @@ EndEvent
 ;Main handler for leveling after sleep
 ;============================================
 
-;Event OnSleepStop(bool abInterrupted)
-;    if (abInterrupted)
-;    ;do nothing if interrupted
-;	else
-;        CurrentPlayerLevel = Game.GetPlayer().GetLevel()
-;            if (CurrentPlayerLevel > TrackedPlayerLevel)
-;                AddSkills()       
-;            endif   
-;	endIf
-;endEvent
-
-;============================================
-;Main function for showing the menu
-;============================================
-
-Event OnKeyDown(int keycode)
-    if (keycode == getStaticSkillMenuKey())
-        OpenMenu()
-    endif
-endEvent
-
-Function OpenMenu()
-    CurrentPlayerLevel = Game.GetPlayer().GetLevel()
+Event OnSleepStop(bool abInterrupted)
+    if (abInterrupted)
+    ;do nothing if interrupted
+	else
+        CurrentPlayerLevel = Game.GetPlayer().GetLevel()
             if (CurrentPlayerLevel > TrackedPlayerLevel)
                 AddSkills()       
-            endif
-endFunction
+            endif   
+	endIf
+endEvent
+
+
 ;============================================
 ;Menu Functions
 ;============================================
@@ -365,6 +349,8 @@ Function Initialization()
 
     ;display confirmation message
     InitializationMessage.show()
+    ;Register Hotkey
+    RegisterForKey(LStaticSkillLevelingKey.GetValueInt())
 EndFunction
 
 Function SetInitialSkills()
