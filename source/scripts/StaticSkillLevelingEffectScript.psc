@@ -1,16 +1,6 @@
 scriptname StaticSkillLevelingEffectScript extends ActiveMagicEffect
 {This script checks for a level up when the player wakes from sleep and allows them to assign skillpoints}
 
-
-GlobalVariable Property LStaticSkillLevelingKey Auto
-
-;==========================================
-;Keybinding
-;==========================================
-
-int staticSkillMenuKey
-;==========================================
-
 ;==========================================
 ;Initialization Properties
 ;==========================================
@@ -108,7 +98,6 @@ Message property SkillIncreasesAtMaxMenu auto
 
 Event OnEffectStart(Actor akTarget, Actor akCaster)
     Initialization()
-    RegisterForKey(48)
 EndEvent
 
 ;==========================================
@@ -128,9 +117,7 @@ EndEvent
 ;============================================
 
 Event OnSleepStop(bool abInterrupted)
-    if (abInterrupted)
-    ;do nothing if interrupted
-	else
+    if (!abInterrupted)
         CurrentPlayerLevel = Game.GetPlayer().GetLevel()
             if (CurrentPlayerLevel > TrackedPlayerLevel)
                 AddSkills()       
@@ -139,14 +126,17 @@ Event OnSleepStop(bool abInterrupted)
 endEvent
 
 ;============================================
-;Main function for showing the menu
+;Main handler for Keybound Menu
 ;============================================
 
-Event OnKeyUP(int KeyCode, float holdTime)
-    if (KeyCode == LStaticSkillLevelingKey.GetValueInt() || KeyCode == 48)
-        AddSkills()
-    endif
-endEvent
+Function OpenMenu()
+    if (!abInterrupted)
+        CurrentPlayerLevel = Game.GetPlayer().GetLevel()
+            if (CurrentPlayerLevel > TrackedPlayerLevel)
+                AddSkills()       
+            endif   
+	endIf
+endFunction
 
 ;============================================
 ;Menu Functions
@@ -359,8 +349,6 @@ Function Initialization()
 
     ;display confirmation message
     InitializationMessage.show()
-    ;Register Hotkey
-    RegisterForKey(LStaticSkillLevelingKey.GetValueInt())
 EndFunction
 
 Function SetInitialSkills()

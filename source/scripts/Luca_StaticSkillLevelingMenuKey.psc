@@ -65,6 +65,7 @@ event OnOptionKeyMapChange(int a_option, int a_keyCode, string a_conflictControl
 		if (continue)
 			LStaticSkillLevelingKey.SetValueInt(a_keyCode);
             SetKeymapOptionValue(a_option, a_keyCode)
+			((self as quest) as StaticSkillLevelingQuestScript).setMenuKeyCode(keyCode)
 		endIf
 	endIf
 endEvent
