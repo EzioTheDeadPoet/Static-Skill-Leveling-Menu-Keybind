@@ -8,6 +8,9 @@ int			_keymapOID_K
 
 ; State
 
+
+int keyCode = 48
+
 GlobalVariable Property LStaticSkillLevelingKey Auto
 
 ; INITIALIZATION ----------------------------------------------------------------------------------
@@ -16,7 +19,7 @@ GlobalVariable Property LStaticSkillLevelingKey Auto
 event OnConfigInit()
 	Pages = new string[1]
 	Pages[0] = "Keybinding"
-
+	keyCode = LStaticSkillLevelingKey.GetValueInt()
 endEvent
 
 ; @implements SKI_QuestBase

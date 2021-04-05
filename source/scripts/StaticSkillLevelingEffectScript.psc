@@ -130,12 +130,10 @@ endEvent
 ;============================================
 
 Function OpenMenu()
-    if (!abInterrupted)
-        CurrentPlayerLevel = Game.GetPlayer().GetLevel()
-            if (CurrentPlayerLevel > TrackedPlayerLevel)
-                AddSkills()       
-            endif   
-	endIf
+    CurrentPlayerLevel = Game.GetPlayer().GetLevel()
+        if (CurrentPlayerLevel > TrackedPlayerLevel)
+            AddSkills()       
+        endif   
 endFunction
 
 ;============================================

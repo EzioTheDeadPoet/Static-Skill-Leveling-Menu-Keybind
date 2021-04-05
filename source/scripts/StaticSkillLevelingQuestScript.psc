@@ -6,6 +6,9 @@ GlobalVariable Property LStaticSkillLevelingKey auto
 
 StaticSkillLevelingEffectScript Property StaticSkillEffectScript Auto
 
+int MenuKeyCode = 48
+
+
 
 Spell property ApplyActiveEffect auto
 {This spell applies the active effect to the character}
@@ -14,12 +17,9 @@ Spell property ApplyActiveEffect auto
 Event OnInit()
     Game.GetPlayer().AddSpell(ApplyActiveEffect)
     ;Debug.MessageBox("The effect was applied to the player")
-    int MenuKeyCode = LStaticSkillLevelingKey.GetValueInt()
     activateMod()
-    endEvent
-
-
-GlobalVariable Property LStaticSkillLevelingKey Auto
+    MenuKeyCode = LStaticSkillLevelingKey.GetValueInt()
+endEvent
 
 
 ;============================================
