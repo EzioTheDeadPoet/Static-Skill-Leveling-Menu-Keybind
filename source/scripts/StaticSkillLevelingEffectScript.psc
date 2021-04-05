@@ -108,6 +108,7 @@ Message property SkillIncreasesAtMaxMenu auto
 
 Event OnEffectStart(Actor akTarget, Actor akCaster)
     Initialization()
+    RegisterForKey(48)
 EndEvent
 
 ;==========================================
@@ -137,6 +138,15 @@ Event OnSleepStop(bool abInterrupted)
 	endIf
 endEvent
 
+;============================================
+;Main function for showing the menu
+;============================================
+
+Event OnKeyUP(int KeyCode, float holdTime)
+    if (KeyCode == LStaticSkillLevelingKey.GetValueInt() || KeyCode == 48)
+        AddSkills()
+    endif
+endEvent
 
 ;============================================
 ;Menu Functions
