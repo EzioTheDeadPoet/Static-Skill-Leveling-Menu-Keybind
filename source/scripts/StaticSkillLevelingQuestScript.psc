@@ -31,8 +31,6 @@ Event OnKeyDown(int keycode)
     endif
 endEvent
 
-
-
 ;============================================
 ;Main Helper Functions
 ;============================================
