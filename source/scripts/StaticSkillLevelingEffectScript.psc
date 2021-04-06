@@ -131,9 +131,7 @@ endEvent
 
 Function OpenMenu()
     CurrentPlayerLevel = Game.GetPlayer().GetLevel()
-        if (CurrentPlayerLevel > TrackedPlayerLevel)
-            AddSkills()       
-        endif   
+    AddSkills()       
 endFunction
 
 ;============================================

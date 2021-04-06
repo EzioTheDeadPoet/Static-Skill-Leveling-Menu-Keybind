@@ -9,7 +9,7 @@ int			_keymapOID_K
 ; State
 
 
-int keyCode = 48
+int keyCode
 
 GlobalVariable Property LStaticSkillLevelingKey Auto
 

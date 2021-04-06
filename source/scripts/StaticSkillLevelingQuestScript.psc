@@ -6,8 +6,7 @@ GlobalVariable Property LStaticSkillLevelingKey auto
 
 StaticSkillLevelingEffectScript Property StaticSkillEffectScript Auto
 
-int MenuKeyCode = 48
-
+int MenuKeyCode
 
 
 Spell property ApplyActiveEffect auto
@@ -17,15 +16,15 @@ Spell property ApplyActiveEffect auto
 Event OnInit()
     Game.GetPlayer().AddSpell(ApplyActiveEffect)
     ;Debug.MessageBox("The effect was applied to the player")
-    activateMod()
     MenuKeyCode = LStaticSkillLevelingKey.GetValueInt()
+    activateMod()
 endEvent
 
 
 ;============================================
 ;Main function for showing the menu
 ;============================================
-Event OnKeyDown(int keycode)
+Event OnKeyUp(int keycode, float holdTime)
     if (keycode == MenuKeyCode)
         StaticSkillEffectScript.OpenMenu()
     endif
